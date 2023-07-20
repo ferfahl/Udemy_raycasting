@@ -17,3 +17,14 @@ class Map {
 		[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 	];
 }
+
+class Player {
+	x;
+	y;
+	radius;
+	turnDirection; // -1 for left, +1 for right
+	walkDirection; // -1 for back, +1 for front
+	rotationAngle = Math.PI / 2;
+	moveSpeed = 3.0;
+	rotationSpeed = 3 * (Math.PI / 180);
+}
