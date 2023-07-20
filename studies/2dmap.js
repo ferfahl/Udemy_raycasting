@@ -5,14 +5,6 @@ const MAP_COLS = 15;
 const W_WIDTH = TILE_SIZE * MAP_COLS;
 const W_HEIGHT = TILE_SIZE * MAP_ROWS;
 
-//player's view angle
-const FOV_ANGLE = 60 * (Math.PI / 180);
-
-//tickness of pixels for the wall
-const WALL_STRIP = 10;
-//has to fill the whole width of the screen
-const NUM_RAYS = W_WIDTH / WALL_STRIP;
-
 class Map {
     constructor() {
         this.grid = [
@@ -96,21 +88,8 @@ class Player {
     }
 }
 
-class Ray {
-    constructor (rayAngle) {
-        this.rayAngle = rayAngle;
-    }
-    render() {
-        stroke("rgba(255, 0, 0, 0.3)");
-        line(player.x, player.y,
-             player.x + Math.cos(this.rayAngle) * 30,
-             player.y + Math.sin(this.rayAngle) * 30);
-    }
-}
-
 var grid = new Map();
 var player = new Player();
-var rays = [];
 
 function keyPressed() {
     if (keyCode == UP_ARROW) {
@@ -136,25 +115,6 @@ function keyReleased() {
     }
 }
 
-function castAllRays() {
-    var columnId = 0;
-    
-    // start first ray subtracting half of the FOV
-    var rayAngle = player.rotationAngle - (FOV_ANGLE / 2);
-
-    rays = [];
-
-    //loop all columns casting the rays for each
-    for (var i = 0; i < NUM_RAYS; i++) {
-        var ray = new Ray(rayAngle);
-        //ray.cast();
-        rays.push(ray);
-
-        rayAngle += FOV_ANGLE / NUM_RAYS;
-        columnId++;
-    }
-}
-
 //TODO: init all objs once
 function setup() {
     createCanvas(W_WIDTH, W_HEIGHT);
@@ -163,7 +123,6 @@ function setup() {
 //TODO: update all objs before rendering next frame
 function update() {
     player.update();
-    castAllRays();
 }
 
 //TODO: draw all objs frame by frame
@@ -171,8 +130,5 @@ function draw() {
     update();
 
     grid.render();
-    for (ray of rays) {
-        ray.render();
-    }
     player.render();
 }
