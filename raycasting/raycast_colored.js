@@ -171,6 +171,7 @@ class Ray {
                 foundHorzWallHit = true;
                 HorzWallHitX = nextHorzTouchX;
                 HorzWallHitY = nextHorzTouchY;
+                HorzWallColor = wallGridContent;
                 break;
             } else {
                 nextHorzTouchX += xstep;
@@ -220,6 +221,7 @@ class Ray {
                 foundVertWallHit = true;
                 VertWallHitX = nextVertTouchX;
                 VertWallHitY = nextVertTouchY;
+                VertWallColor = wallGridContent;
                 break;
             } else {
                 nextVertTouchX += xstep;
@@ -293,14 +295,13 @@ function render3DProjectedWalls() {
         // var alpha = 180 / rayDistance; 
         var alpha = 1.0;
         // set a darker color if the wall is facing north-south
-        var colorBrightness = ray.wasHitVertical ? 255 : 200;
+        var tone = ray.wasHitVertical ? 255 : 180;
 
         //add colors instead of transparency
         // set the correct color based on the wall hit grid content (1=Red, 2=Green, 3=Blue)
-        var colorR = ray.hitWallColor == 1 ? colorBrightness : 0;
-        var colorG = ray.hitWallColor == 2 ? colorBrightness : 0;
-        var colorB = ray.hitWallColor == 3 ? colorBrightness : 0;
-        // var tone = ray.wasHitVertical ? 255 : 180;
+        var colorR = ray.hitWallColor == 1 ? tone : 0;
+        var colorG = ray.hitWallColor == 2 ? tone : 0;
+        var colorB = ray.hitWallColor == 3 ? tone : 0;
 
         //draw the rectangle on screen
         fill("rgba(" + colorR + ", " + colorG + ", " + colorB + ", " + alpha + ")");
