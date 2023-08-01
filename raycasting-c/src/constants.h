@@ -69,4 +69,25 @@ typedef struct s_hit
 # define FPS 30
 # define FRAME_TIME_LENGTH (1000 / FPS)
 
+
+void	destroyWindow(void);
+
+int		start_window(void);
+void	setup(void);
+void	process_input(void);
+
+int		mapHasWallAt(float x, float y);
+void	renderMap(void);
+
+void	movePlayer(float deltaTime);
+void	renderPlayer(void);
+
+float	normalizeAngle(float angle);
+float	distanceBetweenPoints(float x1, float y1, float x2, float y2);
+
+void	renderRays(void);
+void	castAllRays(void);
+
+
+
 #endif
