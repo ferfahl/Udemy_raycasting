@@ -59,7 +59,7 @@ typedef struct s_hit
 # define MAP_COLS 20
 # define NUM_TEXTURES 8
 
-# define MINIMAP_SCALE 0.1
+# define MINIMAP_SCALE 0.4
 
 # define W_WIDTH 1280
 # define W_HEIGHT 800
@@ -97,6 +97,7 @@ void	renderRays(void);
 void	castAllRays(void);
 
 void	drawRect(int x, int y, int width, int height, uint32_t color);
+void	drawLine(int x0, int y0, int x1, int y1, uint32_t color);
 
 int		getMapAt(int x, int y);
 

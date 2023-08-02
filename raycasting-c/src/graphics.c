@@ -81,8 +81,8 @@ void	render(void)
 
 	//minimap:
 	renderMap();
-	// renderRays();
-	// renderPlayer();
+	renderRays();
+	renderPlayer();
 
 	SDL_RenderPresent(renderer);
 }
