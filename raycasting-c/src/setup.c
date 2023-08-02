@@ -19,7 +19,6 @@ int	start_window(void)
 		fprintf(stderr, "Error initializing SDL.\n");
 		return (FALSE);
 	}
-	
 	window = SDL_CreateWindow("Raycast", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, W_WIDTH, W_HEIGHT, SDL_WINDOW_BORDERLESS);
 	if (!window)
 	{
@@ -34,9 +33,16 @@ int	start_window(void)
 		return (FALSE);
 	}
 	SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
+
+	//allocating the amout of bytes to hold the color buffer
+	int	size = W_WIDTH * W_HEIGHT;
+	colorBuffer = (uint32_t *)malloc(sizeof(uint32_t) * (uint32_t)size);
+
+	//creating the SDL Texture
+	colorBufferTexture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, W_WIDTH, W_HEIGHT);
+
 	return (TRUE);
 }
-
 
 void	process_input(void)
 {
@@ -76,6 +82,19 @@ void	process_input(void)
 	}
 }
 
+void	loadTextures(void)
+{
+	//loading textures
+	textures[0] = (uint32_t*)REDBRICK_TEXTURE;
+	textures[1] = (uint32_t*)PURPLESTONE_TEXTURE;
+	textures[2] = (uint32_t*)MOSSYSTONE_TEXTURE;
+	textures[3] = (uint32_t*)GRAYSTONE_TEXTURE;
+	textures[4] = (uint32_t*)COLORSTONE_TEXTURE;
+	textures[5] = (uint32_t*)BLUESTONE_TEXTURE;
+	textures[6] = (uint32_t*)WOOD_TEXTURE;
+	textures[7] = (uint32_t*)EAGLE_TEXTURE;
+}
+
 void	setup(void)
 {
 	player.x = M_WIDTH / 2;
@@ -88,21 +107,5 @@ void	setup(void)
 	player.walkSpeed = 100;
 	player.turnSpeed = 45 * (PI / 180);
 	//start objs
-
-	//allocating the amout of bytes to hold the color buffer
-	int	size = W_WIDTH * W_HEIGHT;
-	colorBuffer = (uint32_t *)malloc(sizeof(uint32_t) * (uint32_t)size);
-
-	//creating the SDL Texture
-	colorBufferTexture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, W_WIDTH, W_HEIGHT);
-	
-	//loading textures
-	textures[0] = (uint32_t*)REDBRICK_TEXTURE;
-	textures[1] = (uint32_t*)PURPLESTONE_TEXTURE;
-	textures[2] = (uint32_t*)MOSSYSTONE_TEXTURE;
-	textures[3] = (uint32_t*)GRAYSTONE_TEXTURE;
-	textures[4] = (uint32_t*)COLORSTONE_TEXTURE;
-	textures[5] = (uint32_t*)BLUESTONE_TEXTURE;
-	textures[6] = (uint32_t*)WOOD_TEXTURE;
-	textures[7] = (uint32_t*)EAGLE_TEXTURE;
+	loadTextures();
 }

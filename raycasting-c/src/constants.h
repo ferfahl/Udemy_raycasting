@@ -98,6 +98,8 @@ void	castAllRays(void);
 
 void	drawRect(int x, int y, int width, int height, uint32_t color);
 
-int	getMapAt(int x, int y);
+int		getMapAt(int x, int y);
+
+void	render(void);
 
 #endif
