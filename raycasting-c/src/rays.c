@@ -125,11 +125,11 @@ void	castRay(float rayAngle, int id)
 	if (foundHorzWallHit)
 		horzHitDistance = distanceBetweenPoints(player.x, player.y, horzWallHitX, horzWallHitY);
 	else
-		horzHitDistance = INT_MAX;
+		horzHitDistance = FLT_MAX;
 	if (foundVertWallHit)
 		vertHitDistance =  distanceBetweenPoints(player.x, player.y, vertWallHitX, vertWallHitY);
 	else
-		vertHitDistance = INT_MAX;
+		vertHitDistance = FLT_MAX;
 	if (vertHitDistance < horzHitDistance)
 	{
 		rays[id].distance = vertHitDistance;

@@ -4,7 +4,7 @@
 # include <stdio.h>
 # include <stdint.h>
 # include <stdbool.h>
-# include <SDL2/SDL.h>
+# include <SDL.h>
 # include <math.h>
 # include <limits.h>
 
@@ -59,7 +59,7 @@ typedef struct s_hit
 # define MAP_COLS 20
 # define NUM_TEXTURES 8
 
-# define MINIMAP_SCALE 0.4
+# define MINIMAP_SCALE 0.1
 
 # define W_WIDTH 1280
 # define W_HEIGHT 800
