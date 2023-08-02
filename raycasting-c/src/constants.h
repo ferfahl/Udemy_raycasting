@@ -2,6 +2,8 @@
 # define CONSTANTS_H
 
 # include <stdio.h>
+# include <stdint.h>
+# include <stdbool.h>
 # include <SDL2/SDL.h>
 # include <math.h>
 # include <limits.h>
@@ -46,21 +48,27 @@ typedef struct s_hit
 	int		isRayRight;
 }				t_hit;
 
+# define TRUE 1
+# define FALSE 0
 
 # define PI 3.14159265
 # define TWO_PI 6.28318530
 
 # define TILE_SIZE 64
-# define MAP_ROWS 11
-# define MAP_COLS 15
+# define MAP_ROWS 13
+# define MAP_COLS 20
+# define NUM_TEXTURES 8
 
-# define MINIMAP_SCALE 1.0
+# define MINIMAP_SCALE 0.1
 
-# define FALSE 0
-# define TRUE 1
+# define W_WIDTH 1280
+# define W_HEIGHT 800
 
-# define W_WIDTH (MAP_COLS * TILE_SIZE)
-# define W_HEIGHT (MAP_ROWS * TILE_SIZE)
+# define M_WIDTH (MAP_COLS * TILE_SIZE)
+# define M_HEIGHT (MAP_ROWS * TILE_SIZE)
+
+# define TEXTURE_W 64
+# define TEXTURE_H 64
 
 # define FOV_ANGLE (60 * (PI / 180))
 
@@ -88,6 +96,8 @@ float	distanceBetweenPoints(float x1, float y1, float x2, float y2);
 void	renderRays(void);
 void	castAllRays(void);
 
+void	drawRect(int x, int y, int width, int height, uint32_t color);
 
+int	getMapAt(int x, int y);
 
 #endif

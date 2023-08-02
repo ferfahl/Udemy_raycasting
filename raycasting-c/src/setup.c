@@ -1,4 +1,5 @@
 #include "constants.h"
+#include "textures.h"
 
 extern const int	map[MAP_ROWS][MAP_COLS];
 extern t_player	player;
@@ -7,6 +8,9 @@ extern SDL_Window* window;
 extern SDL_Renderer* renderer;
 extern int	isGameRunning;
 extern int	ticksLastFrame;
+extern uint32_t* colorBuffer;
+extern SDL_Texture* colorBufferTexture;
+extern uint32_t* textures[NUM_TEXTURES];
 
 int	start_window(void)
 {
@@ -15,6 +19,7 @@ int	start_window(void)
 		fprintf(stderr, "Error initializing SDL.\n");
 		return (FALSE);
 	}
+	
 	window = SDL_CreateWindow("Raycast", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, W_WIDTH, W_HEIGHT, SDL_WINDOW_BORDERLESS);
 	if (!window)
 	{
@@ -73,8 +78,8 @@ void	process_input(void)
 
 void	setup(void)
 {
-	player.x = W_WIDTH / 2;
-	player.y = W_HEIGHT / 2;
+	player.x = M_WIDTH / 2;
+	player.y = M_HEIGHT / 2;
 	player.width = 1;
 	player.height = 1;
 	player.turnDirection = 0;
@@ -83,4 +88,21 @@ void	setup(void)
 	player.walkSpeed = 100;
 	player.turnSpeed = 45 * (PI / 180);
 	//start objs
+
+	//allocating the amout of bytes to hold the color buffer
+	int	size = W_WIDTH * W_HEIGHT;
+	colorBuffer = (uint32_t *)malloc(sizeof(uint32_t) * (uint32_t)size);
+
+	//creating the SDL Texture
+	colorBufferTexture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, W_WIDTH, W_HEIGHT);
+	
+	//loading textures
+	textures[0] = (uint32_t*)REDBRICK_TEXTURE;
+	textures[1] = (uint32_t*)PURPLESTONE_TEXTURE;
+	textures[2] = (uint32_t*)MOSSYSTONE_TEXTURE;
+	textures[3] = (uint32_t*)GRAYSTONE_TEXTURE;
+	textures[4] = (uint32_t*)COLORSTONE_TEXTURE;
+	textures[5] = (uint32_t*)BLUESTONE_TEXTURE;
+	textures[6] = (uint32_t*)WOOD_TEXTURE;
+	textures[7] = (uint32_t*)EAGLE_TEXTURE;
 }

@@ -1,6 +1,5 @@
 #include "constants.h"
 
-extern const int	map[MAP_ROWS][MAP_COLS];
 extern t_player	player;
 extern t_rays		rays[NUM_RAYS];
 extern SDL_Window* window;
@@ -56,7 +55,7 @@ void	castRay(float rayAngle, int id)
 	float	nextHorzTouchY = yintercept;
 
 	//increment xstep and ystep until we find a wall
-	while (nextHorzTouchX >= 0 && nextHorzTouchX <= W_WIDTH && nextHorzTouchY >= 0 && nextHorzTouchY <= W_HEIGHT) {
+	while (nextHorzTouchX >= 0 && nextHorzTouchX <= M_WIDTH && nextHorzTouchY >= 0 && nextHorzTouchY <= M_HEIGHT) {
 		float	xCheck = nextHorzTouchX;
 		float	yCheck = nextHorzTouchY + (isRayFacingUp ? -1 : 0);
 		
@@ -66,7 +65,7 @@ void	castRay(float rayAngle, int id)
 			foundHorzWallHit = TRUE;
 			horzWallHitX = nextHorzTouchX;
 			horzWallHitY = nextHorzTouchY;
-			horzWallContent = map[(int)floor(yCheck / TILE_SIZE)][(int)floor(xCheck / TILE_SIZE)];
+			horzWallContent = getMapAt((int)floor(yCheck / TILE_SIZE), (int)floor(xCheck / TILE_SIZE));
 			break;
 		}
 		else
@@ -100,7 +99,7 @@ void	castRay(float rayAngle, int id)
 	float	nextVertTouchY = yintercept;
 
 	//increment xstep and ystep until we find a wall
-	while (nextVertTouchX >= 0 && nextVertTouchX <= W_WIDTH && nextVertTouchY >= 0 && nextVertTouchY <= W_HEIGHT) {
+	while (nextVertTouchX >= 0 && nextVertTouchX <= M_WIDTH && nextVertTouchY >= 0 && nextVertTouchY <= M_HEIGHT) {
 		float	xCheck = nextVertTouchX + (isRayFacingLeft ? -1 : 0);
 		float	yCheck = nextVertTouchY;
 		
@@ -110,7 +109,7 @@ void	castRay(float rayAngle, int id)
 			foundVertWallHit = TRUE;
 			vertWallHitX = nextVertTouchX;
 			vertWallHitY = nextVertTouchY;
-			vertWallContent = map[(int)floor(yCheck / TILE_SIZE)][(int)floor(xCheck / TILE_SIZE)];
+			vertWallContent = getMapAt((int)floor(yCheck / TILE_SIZE), (int)floor(xCheck / TILE_SIZE));
 			break;
 		}
 		else
@@ -156,16 +155,14 @@ void	castRay(float rayAngle, int id)
 
 void	castAllRays(void)
 {
-	float	rayAngle = player.rotationAngle - (FOV_ANGLE / 2);
-	int		i = 0;
+	float	distProjPlane = (M_WIDTH / 2) / tan(FOV_ANGLE / 2);
 
-	while (i < NUM_RAYS)
+	for (int col= 0; col < NUM_RAYS; col++)
 	{
-		castRay(rayAngle, i);
-		rayAngle += FOV_ANGLE / NUM_RAYS;
-		i++;
+		float angle = player.rotationAngle + atan((col - NUM_RAYS/2) / distProjPlane);
+
+		castRay(angle, col);
 	}
-	
 }
 
 void	renderRays(void)
