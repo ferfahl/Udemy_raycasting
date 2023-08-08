@@ -2,7 +2,7 @@
 
 extern SDL_Window* window;
 extern SDL_Renderer* renderer;
-extern uint32_t*	colorBuffer;
+extern color_t*	colorBuffer;
 extern SDL_Texture*	colorBufferTexture;
 
 void	destroyWindow(void)

@@ -7,26 +7,42 @@ extern SDL_Renderer* renderer;
 extern int	isGameRunning;
 extern int	ticksLastFrame;
 
+int	isFacingDown(float angle)
+{
+	if (angle > 0 && angle < PI)
+		return (TRUE);
+	return (FALSE);
+}
+
+int	isFacingUp(float angle)
+{
+	if (!isFacingDown(angle))
+		return (TRUE);
+	return (FALSE);
+}
+
+int	isFacingRight(float angle)
+{
+	if (angle < 0.5 * PI || angle > 1.5 * PI)
+		return (TRUE);
+	return (FALSE);
+}
+
+int	isFacingLeft(float angle)
+{
+	if (!isFacingRight(angle))
+		return (TRUE);
+	return (FALSE);
+}
+
 void	castRay(float rayAngle, int id)
 {
 	rayAngle = normalizeAngle(rayAngle);
 
-	int	isRayFacingDown;
-	int	isRayFacingUp;
-	int	isRayFacingRight;
-	int	isRayFacingLeft;
-
-	if (rayAngle > 0 && rayAngle < PI)
-		isRayFacingDown = TRUE;
-	else
-		isRayFacingDown = FALSE;
-	isRayFacingUp = !isRayFacingDown;
-
-	if (rayAngle < 0.5 * PI || rayAngle > 1.5 * PI)
-		isRayFacingRight = TRUE;
-	else
-		isRayFacingRight = FALSE;
-	isRayFacingLeft = !isRayFacingRight;
+	int	isRayFacingDown = isFacingDown(rayAngle);
+	int	isRayFacingUp = isFacingUp(rayAngle);
+	int	isRayFacingRight = isFacingRight(rayAngle);
+	int	isRayFacingLeft = isFacingLeft(rayAngle);
 
 	float xintercept, yintercept;
 	float xstep, ystep;

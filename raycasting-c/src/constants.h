@@ -4,7 +4,8 @@
 # include <stdio.h>
 # include <stdint.h>
 # include <stdbool.h>
-# include <SDL.h>
+# include <SDL2/SDL.h>
+// # include <SDL.h>
 # include <math.h>
 # include <limits.h>
 
@@ -47,6 +48,8 @@ typedef struct s_hit
 	int		isRayLeft;
 	int		isRayRight;
 }				t_hit;
+
+typedef	uint32_t color_t;
 
 # define TRUE 1
 # define FALSE 0
@@ -96,8 +99,9 @@ float	distanceBetweenPoints(float x1, float y1, float x2, float y2);
 void	renderRays(void);
 void	castAllRays(void);
 
-void	drawRect(int x, int y, int width, int height, uint32_t color);
-void	drawLine(int x0, int y0, int x1, int y1, uint32_t color);
+void	drawPixel(int x, int y, color_t color);
+void	drawRect(int x, int y, int width, int height, color_t color);
+void	drawLine(int x0, int y0, int x1, int y1, color_t color);
 
 int		getMapAt(int x, int y);
 

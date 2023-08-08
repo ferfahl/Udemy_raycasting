@@ -7,9 +7,9 @@ SDL_Window* window = NULL;
 SDL_Renderer* renderer = NULL;
 int	isGameRunning;
 int	ticksLastFrame= 0;
-uint32_t* colorBuffer = NULL;
+color_t* colorBuffer = NULL;
 SDL_Texture* colorBufferTexture = NULL;
-uint32_t* textures[NUM_TEXTURES];
+color_t* textures[NUM_TEXTURES];
 
 void	update()
 {

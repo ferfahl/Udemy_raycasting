@@ -1,13 +1,13 @@
 #include "constants.h"
 
-extern uint32_t* colorBuffer;
+extern color_t* colorBuffer;
 
-void	drawPixel(int x, int y, uint32_t color)
+void	drawPixel(int x, int y, color_t color)
 {
 	colorBuffer[(W_WIDTH * y) + x] = color;
 }
 
-void	drawRect(int x, int y, int width, int height, uint32_t color)
+void	drawRect(int x, int y, int width, int height, color_t color)
 {
 	for (int i = x; i <= (x + width); i++)
 	{
@@ -18,7 +18,7 @@ void	drawRect(int x, int y, int width, int height, uint32_t color)
 	}
 }
 
-void	drawLine(int x0, int y0, int x1, int y1, uint32_t color)
+void	drawLine(int x0, int y0, int x1, int y1, color_t color)
 {
 	int	delta_X = (x1 - x0);
 	int	delta_Y = (y1 - y0);

@@ -8,9 +8,9 @@ extern SDL_Window* window;
 extern SDL_Renderer* renderer;
 extern int	isGameRunning;
 extern int	ticksLastFrame;
-extern uint32_t* colorBuffer;
+extern color_t* colorBuffer;
 extern SDL_Texture* colorBufferTexture;
-extern uint32_t* textures[NUM_TEXTURES];
+extern color_t* textures[NUM_TEXTURES];
 
 int	start_window(void)
 {
@@ -36,7 +36,7 @@ int	start_window(void)
 
 	//allocating the amout of bytes to hold the color buffer
 	int	size = W_WIDTH * W_HEIGHT;
-	colorBuffer = (uint32_t *)malloc(sizeof(uint32_t) * (uint32_t)size);
+	colorBuffer = (color_t *)malloc(sizeof(color_t) * (color_t)size);
 
 	//creating the SDL Texture
 	colorBufferTexture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, W_WIDTH, W_HEIGHT);
@@ -85,14 +85,14 @@ void	process_input(void)
 void	loadTextures(void)
 {
 	//loading textures
-	textures[0] = (uint32_t*)REDBRICK_TEXTURE;
-	textures[1] = (uint32_t*)PURPLESTONE_TEXTURE;
-	textures[2] = (uint32_t*)MOSSYSTONE_TEXTURE;
-	textures[3] = (uint32_t*)GRAYSTONE_TEXTURE;
-	textures[4] = (uint32_t*)COLORSTONE_TEXTURE;
-	textures[5] = (uint32_t*)BLUESTONE_TEXTURE;
-	textures[6] = (uint32_t*)WOOD_TEXTURE;
-	textures[7] = (uint32_t*)EAGLE_TEXTURE;
+	textures[0] = (color_t*)REDBRICK_TEXTURE;
+	textures[1] = (color_t*)PURPLESTONE_TEXTURE;
+	textures[2] = (color_t*)MOSSYSTONE_TEXTURE;
+	textures[3] = (color_t*)GRAYSTONE_TEXTURE;
+	textures[4] = (color_t*)COLORSTONE_TEXTURE;
+	textures[5] = (color_t*)BLUESTONE_TEXTURE;
+	textures[6] = (color_t*)WOOD_TEXTURE;
+	textures[7] = (color_t*)EAGLE_TEXTURE;
 }
 
 void	setup(void)
